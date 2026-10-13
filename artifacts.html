@@ -55,7 +55,9 @@ h1 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 5vw, 
 h2 { font-family: var(--display); font-weight: 600; font-size: 26px; line-height: 1.2; margin: 0; text-wrap: balance; }
 p { margin: 0; }
 .lede { color: var(--muted); font-size: 16px; }
-.cap { font-size: 13px; color: var(--muted); }
+.cap { font-family: "Caveat", "Segoe Print", "Bradley Hand", cursive; font-size: 21px; line-height: 1.25; font-weight: 500; color: var(--ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cap { color: #FFFFFF; } }
+:root[data-theme="dark"] .cap { color: #FFFFFF; }
 
 .sheet { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 28px; display: grid; gap: 22px; min-width: 0; }
 .sheet-head { display: grid; gap: 6px; max-width: 70ch; }
