@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Program Artifacts | Sneha Nandini Bolloju</title>
+<meta name="description" content="Five program artifacts from a CRM transformation, rebuilt with sample data.">
+<meta property="og:title" content="Program Artifacts | Sneha Nandini Bolloju">
+<meta property="og:description" content="Five program artifacts from a CRM transformation, rebuilt with sample data.">
+<meta name="theme-color" content="#14294B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="site.css">
+<style>
+/* Layout: one calm column of five exhibits, each a self-contained "sheet" that can be exported as an image */
+:root {
+  --bg: #F4F6F9;
+  --surface: #FFFFFF;
+  --ink: #0F1E36;
+  --muted: #56637A;
+  --line: #DCE2EB;
+  --navy: #14294B;
+  --navy-soft: #E6ECF5;
+  --emerald: #0C8560;
+  --emerald-soft: #E1F2EA;
+  --warn: #A86710;
+  --warn-soft: #FBF0DC;
+  --crit: #B4322A;
+  --crit-soft: #FBE6E4;
+  --on-navy: #FFFFFF;
+  --display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1322; --surface: #101C31; --ink: #E5EBF4; --muted: #95A3BA; --line: #233353;
+    --navy: #2D4C80; --navy-soft: #172947; --emerald: #3CC293; --emerald-soft: #0F3428;
+    --warn: #E5A646; --warn-soft: #3A2B12; --crit: #F07A70; --crit-soft: #3D1A18; --on-navy: #FFFFFF;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A1322; --surface: #101C31; --ink: #E5EBF4; --muted: #95A3BA; --line: #233353;
+  --navy: #2D4C80; --navy-soft: #172947; --emerald: #3CC293; --emerald-soft: #0F3428;
+  --warn: #E5A646; --warn-soft: #3A2B12; --crit: #F07A70; --crit-soft: #3D1A18; --on-navy: #FFFFFF;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; padding-block: 48px 80px; display: grid; gap: 40px; }
+header.intro { display: grid; gap: 10px; max-width: 68ch; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--emerald); }
+h1 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; margin: 0; text-wrap: balance; color: var(--ink); }
+h2 { font-family: var(--display); font-weight: 600; font-size: 26px; line-height: 1.2; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+.lede { color: var(--muted); font-size: 16px; }
+.note { font-size: 13px; color: var(--muted); }
+
+.sheet { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 28px; display: grid; gap: 22px; min-width: 0; }
+.sheet-head { display: grid; gap: 6px; max-width: 70ch; }
+.sheet-head .eyebrow { color: var(--emerald); }
+.sheet-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 12px; }
+.tag { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+.scroll { overflow-x: auto; min-width: 0; }
+
+/* 1. Timeline */
+.gantt { min-width: 760px; display: grid; grid-template-columns: 210px repeat(20, 1fr); row-gap: 8px; font-size: 13px; }
+.gantt .m { grid-row: 1; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border-left: 1px solid var(--line); padding-left: 6px; padding-bottom: 4px; }
+.gantt .lbl { grid-column: 1; align-self: center; padding-right: 12px; font-weight: 500; }
+.gantt .lbl small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.bar { height: 26px; border-radius: 4px; align-self: center; display: flex; align-items: center; padding-inline: 8px; font-family: var(--mono); font-size: 11px; white-space: nowrap; overflow: hidden; }
+.bar.navy { background: var(--navy); color: var(--on-navy); }
+.bar.soft { background: var(--navy-soft); color: var(--ink); border: 1px dashed var(--navy); }
+.bar.em { background: var(--emerald); color: var(--on-navy); }
+.bar.emsoft { background: var(--emerald-soft); color: var(--ink); border: 1px solid var(--emerald); }
+.gl { grid-row: 2 / span 7; border-left: 1px solid var(--line); }
+.golive { grid-row: 2 / span 7; border-left: 2px solid var(--emerald); position: relative; z-index: 1; }
+.golive span { position: absolute; top: -2px; left: 6px; font-family: var(--mono); font-size: 11px; color: var(--emerald); white-space: nowrap; font-weight: 500; background: var(--surface); padding-inline: 4px; }
+.adopt { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.adopt > div { border-top: 3px solid var(--line); padding-top: 8px; display: grid; gap: 2px; }
+.adopt > div.full { border-top-color: var(--emerald); }
+.adopt b { font-family: var(--display); font-size: 30px; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; }
+.adopt span { font-size: 12px; color: var(--muted); }
+.meter { height: 6px; background: var(--navy-soft); border-radius: 3px; overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--emerald); }
+
+/* 2. Tracker */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 8px; }
+.kpi { padding: 14px 16px; display: grid; gap: 2px; border-right: 1px solid var(--line); }
+.kpi:last-child { border-right: 0; }
+.kpi .k { font-size: 12px; color: var(--muted); }
+.kpi .v { font-family: var(--display); font-size: 28px; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; }
+.kpi .v small { font-family: var(--body); font-size: 13px; color: var(--muted); font-weight: 400; }
+table { border-collapse: collapse; width: 100%; min-width: 900px; font-size: 13px; }
+th { text-align: left; font-family: var(--mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+td.num { font-variant-numeric: tabular-nums; font-family: var(--mono); font-size: 12px; white-space: nowrap; }
+td.id { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.p-done { background: var(--emerald-soft); color: var(--emerald); }
+.p-uat { background: var(--navy-soft); color: var(--ink); }
+.p-risk { background: var(--warn-soft); color: var(--warn); }
+.p-roll { background: var(--crit-soft); color: var(--crit); }
+.p-plan { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+.ready { display: flex; gap: 4px; flex-wrap: nowrap; }
+.ready span { font-family: var(--mono); font-size: 10px; padding: 2px 5px; border-radius: 3px; border: 1px solid var(--line); color: var(--muted); }
+.ready span.y { border-color: var(--emerald); color: var(--emerald); background: var(--emerald-soft); }
+.age-hi { color: var(--crit); font-weight: 600; }
+.age-mid { color: var(--warn); font-weight: 600; }
+
+/* 3. DoD */
+.dod { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: stretch; }
+.dod-col { border: 1px solid var(--line); border-radius: 8px; padding: 18px; display: grid; gap: 12px; align-content: start; }
+.dod-col.ops { border-color: var(--emerald); background: var(--emerald-soft); }
+.dod-col h3 { margin: 0; font-size: 15px; font-weight: 700; }
+.dod-col h3 small { display: block; font-weight: 400; font-size: 12px; color: var(--muted); }
+.dod ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.dod li { display: grid; grid-template-columns: 18px 1fr; gap: 10px; font-size: 14px; }
+.box { width: 18px; height: 18px; border: 1.5px solid var(--navy); border-radius: 4px; margin-top: 2px; display: grid; place-items: center; }
+.ops .box { border-color: var(--emerald); background: var(--surface); }
+.box svg { width: 12px; height: 12px; }
+.dod-arrow { align-self: center; font-family: var(--mono); font-size: 12px; color: var(--muted); display: grid; justify-items: center; gap: 4px; text-align: center; }
+.dod-arrow svg { width: 28px; height: 28px; }
+.done-line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 18px; border-radius: 8px; background: var(--navy); color: var(--on-navy); font-weight: 600; }
+.done-line .tag { opacity: .8; font-weight: 400; }
+
+/* 4. Stakeholder map */
+.smap { display: grid; grid-template-columns: 1fr 230px 1fr; grid-template-areas: ". lead ." "biz core ven"; gap: 18px 28px; align-items: center; }
+.node { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--surface); font-size: 13px; display: grid; gap: 1px; }
+.node b { font-weight: 600; font-size: 14px; }
+.node span { color: var(--muted); font-size: 12px; }
+.group { display: grid; gap: 8px; }
+.group > .tag { color: var(--muted); }
+.biz { grid-area: biz; }
+.ven { grid-area: ven; }
+.ven .node { border-left: 3px solid var(--emerald); }
+.biz .node { border-left: 3px solid var(--navy); }
+.lead { grid-area: lead; }
+.lead .node { text-align: center; border-color: var(--navy); }
+.core { grid-area: core; background: var(--navy); color: var(--on-navy); border-radius: 10px; padding: 20px 16px; text-align: center; display: grid; gap: 6px; position: relative; }
+.core b { font-family: var(--display); font-size: 20px; font-weight: 600; }
+.core span { font-size: 12px; opacity: .85; }
+.core ul { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 3px; font-size: 12px; text-align: left; }
+.core li::before { content: "– "; opacity: .6; }
+.flowtag { font-family: var(--mono); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); text-align: center; }
+
+/* 5. Cadence + escalation */
+.cadence { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.cad { border: 1px solid var(--line); border-radius: 8px; padding: 14px; display: grid; gap: 6px; align-content: start; }
+.cad .tag { color: var(--emerald); }
+.cad b { font-size: 15px; }
+.cad p { font-size: 13px; color: var(--muted); }
+.esc { display: grid; gap: 0; }
+.step { display: grid; grid-template-columns: 34px 1fr; gap: 14px; }
+.rail { display: grid; justify-items: center; grid-template-rows: 34px 1fr; }
+.dot { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-family: var(--mono); font-size: 12px; font-weight: 500; background: var(--navy-soft); color: var(--ink); border: 1px solid var(--navy); }
+.step.hot .dot { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
+.step.end .dot { background: var(--emerald); border-color: var(--emerald); color: var(--on-navy); }
+.rail i { width: 2px; background: var(--line); }
+.step:last-child .rail i { display: none; }
+.step .txt { padding-bottom: 18px; display: grid; gap: 2px; }
+.step .txt b { font-size: 14px; }
+.step .txt span { font-size: 13px; color: var(--muted); }
+.split { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; }
+.sub { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; display: block; }
+
+@media (max-width: 760px) {
+  .sheet { padding: 20px 16px; }
+  .dod { grid-template-columns: 1fr; }
+  .dod-arrow svg { transform: rotate(90deg); }
+  .smap { grid-template-columns: 1fr; grid-template-areas: "lead" "core" "biz" "ven"; }
+  .split { grid-template-columns: 1fr; }
+  .kpi { border-right: 0; border-bottom: 1px solid var(--line); }
+  .kpi:last-child { border-bottom: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .meter i { transition: width .6s ease; }
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add("js")</script>
+<nav class="site-nav" aria-label="Main"><div class="container"><a class="brand" href="index.html">Sneha <span>Nandini</span> Bolloju</a><div class="nav-links"><a href="index.html">Home</a><a href="index.html#work">Case studies</a><a href="artifacts.html" aria-current="page">Artifacts</a><a href="about.html">About</a><a href="Sneha_Nandini_Bolloju_Resume.pdf" target="_blank" rel="noopener">Resume</a></div></div></nav>
+<main style="padding:0">
+<div class="wrap">
+  
+  
+  <!--banner--><figure class="banner cs-banner" aria-hidden="true"><img src="banner-artifacts.jpg" alt="" width="1568" height="672"><svg viewBox="0 0 1568 672" preserveAspectRatio="xMidYMid slice"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#263142" fill-opacity=".62"/></marker></defs><rect class="pill" x="880" y="316" width="132" height="56" rx="28"/><text class="ptxt" x="946.0" y="350" text-anchor="middle">PLAN</text><line class="ln" x1="1016" y1="344" x2="1046" y2="344" marker-end="url(#ah)"/><rect class="pill" x="1050" y="316" width="132" height="56" rx="28"/><text class="ptxt" x="1116.0" y="350" text-anchor="middle">TRACK</text><line class="ln" x1="1186" y1="344" x2="1216" y2="344" marker-end="url(#ah)"/><rect class="pill" x="1220" y="316" width="140" height="56" rx="28"/><text class="ptxt" x="1290.0" y="350" text-anchor="middle">GOVERN</text><line class="ln" x1="1364" y1="344" x2="1394" y2="344" marker-end="url(#ah)"/><rect class="pill on" x="1398" y="316" width="116" height="56" rx="28"/><text class="ptxt" x="1456.0" y="350" text-anchor="middle">READY</text><text class="lbl" x="946" y="404" text-anchor="middle">TIMELINE</text><text class="lbl" x="1116" y="404" text-anchor="middle">TRACKER</text><text class="lbl" x="1290" y="404" text-anchor="middle">CADENCE</text><text class="lbl" x="1456" y="404" text-anchor="middle">DONE</text></svg></figure><!--/banner-->
+  <header class="intro">
+    <span class="eyebrow">Portfolio · Program artifacts</span>
+    <h1>How I run a program</h1>
+    <p class="lede">Five working artifacts from the CRM transformation I led for a luxury jewellery retailer, rebuilt with sample data. They show how the program was planned, tracked, governed and handed over to the people who use it.</p>
+    <p class="note">All figures in the tracker are illustrative. No company data is shown.</p>
+  </header>
+
+  <!-- 1. TIMELINE -->
+  <section class="sheet" id="timeline">
+    <div class="sheet-head">
+      <span class="eyebrow">Artifact 1 · Program timeline</span>
+      <h2>From personal diaries to a live CRM in four months</h2>
+      <p class="note">Requirements and development ran in parallel. Teams started using each feature as it went live, so go-live was a step, not a switch.</p>
+    </div>
+    <div class="scroll">
+      <div class="gantt" role="img" aria-label="Gantt chart of CRM program phases from November 2025 to March 2026">
+        <div class="m" style="grid-column:2 / span 4">Nov 2025</div>
+        <div class="m" style="grid-column:6 / span 4">Dec</div>
+        <div class="m" style="grid-column:10 / span 4">Jan 2026</div>
+        <div class="m" style="grid-column:14 / span 4">Feb</div>
+        <div class="m" style="grid-column:18 / span 4">Mar</div>
+
+        <div class="gl" style="grid-column:2"></div><div class="gl" style="grid-column:6"></div><div class="gl" style="grid-column:10"></div><div class="gl" style="grid-column:14"></div><div class="gl" style="grid-column:18"></div>
+        <div class="golive" style="grid-column:16"><span>Phase 1 go-live</span></div>
+
+        <div class="lbl" style="grid-row:3">Requirements &amp; user stories<small>Sales, Inventory, Orders, Leadership</small></div>
+        <div class="bar navy" style="grid-row:3; grid-column:2 / span 5">~30 days</div>
+
+        <div class="lbl" style="grid-row:4">Development<small>6 vendor teams</small></div>
+        <div class="bar navy" style="grid-row:4; grid-column:4 / span 9">~60 days, in parallel</div>
+
+        <div class="lbl" style="grid-row:5">SOPs &amp; training<small>2 batches, store stays open</small></div>
+        <div class="bar soft" style="grid-row:5; grid-column:10 / span 6">SOP · L&amp;D · role play · quiz</div>
+
+        <div class="lbl" style="grid-row:6">Semi-digital rollout<small>Live features + structured Excel</small></div>
+        <div class="bar soft" style="grid-row:6; grid-column:11 / span 5">use features as they ship</div>
+
+        <div class="lbl" style="grid-row:7">User acceptance testing</div>
+        <div class="bar navy" style="grid-row:7; grid-column:14 / span 2">~2 wks</div>
+
+        <div class="lbl" style="grid-row:8">Adoption &amp; office hours</div>
+        <div class="bar em" style="grid-row:8; grid-column:16 / span 4">4 weeks to full team</div>
+      </div>
+    </div>
+    <div class="adopt" aria-label="Adoption after go-live">
+      <div><span>Week 1</span><b>15%</b><div class="meter"><i style="width:15%"></i></div></div>
+      <div><span>Week 2</span><b>40%</b><div class="meter"><i style="width:40%"></i></div></div>
+      <div class="full"><span>Week 4</span><b>100%</b><div class="meter"><i style="width:100%"></i></div></div>
+    </div>
+    <div class="sheet-foot"><span>CRM transformation · luxury jewellery retail · 3 branches, 43 sales staff</span><span class="tag">Phase dates approximate</span></div>
+  </section>
+
+  <!-- 2. TRACKER -->
+  <section class="sheet" id="tracker">
+    <div class="sheet-head">
+      <span class="eyebrow">Artifact 2 · Program tracker</span>
+      <h2>One tracker for delivery, blockers and readiness</h2>
+      <p class="note">The MIS sheet was the program's single source of truth. Each feature carried its sprint status, its blockers and how long they had been open, its UAT defects, and whether the business was ready to use it.</p>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><span class="k">Sprint 4 committed vs delivered</span><span class="v">6 <small>of 8 stories</small></span></div>
+      <div class="kpi"><span class="k">Rolled over to sprint 5</span><span class="v">2 <small>stories</small></span></div>
+      <div class="kpi"><span class="k">Open blockers</span><span class="v">2 <small>oldest 9 days</small></span></div>
+      <div class="kpi"><span class="k">UAT defects</span><span class="v">5 <small>open · 15 closed</small></span></div>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>ID</th><th>Feature</th><th>Owner team</th><th>Sprint</th><th>Status</th><th>Blocker</th><th>Age</th><th>UAT open / total</th><th>Readiness</th></tr></thead>
+        <tbody>
+          <tr><td class="id">F-01</td><td>Customer profiles &amp; segmentation</td><td>CRM development</td><td class="num">S3</td><td><span class="pill p-done">Done</span></td><td>—</td><td class="num">—</td><td class="num">0 / 6</td><td><div class="ready"><span class="y">SOP</span><span class="y">Trained</span><span class="y">Quiz</span></div></td></tr>
+          <tr><td class="id">F-02</td><td>Follow-up types &amp; reminders</td><td>CRM development</td><td class="num">S4</td><td><span class="pill p-uat">In UAT</span></td><td>—</td><td class="num">—</td><td class="num">2 / 5</td><td><div class="ready"><span class="y">SOP</span><span class="y">Trained</span><span>Quiz</span></div></td></tr>
+          <tr><td class="id">F-03</td><td>Order tracking</td><td>CRM development + Billing</td><td class="num">S4</td><td><span class="pill p-risk">At risk</span></td><td>Billing field mapping pending</td><td class="num age-mid">5 d</td><td class="num">3 / 4</td><td><div class="ready"><span class="y">SOP</span><span>Trained</span><span>Quiz</span></div></td></tr>
+          <tr><td class="id">F-04</td><td>Gift card referrals</td><td>Gift card vendor</td><td class="num">S4 → S5</td><td><span class="pill p-roll">Rolled over</span></td><td>Test build delayed · escalated</td><td class="num age-hi">9 d</td><td class="num">—</td><td><div class="ready"><span>SOP</span><span>Trained</span><span>Quiz</span></div></td></tr>
+          <tr><td class="id">F-05</td><td>Digital gold redemption in store</td><td>Digital gold vendor</td><td class="num">S5</td><td><span class="pill p-uat">In progress</span></td><td>—</td><td class="num">—</td><td class="num">—</td><td><div class="ready"><span class="y">SOP</span><span>Trained</span><span>Quiz</span></div></td></tr>
+          <tr><td class="id">F-06</td><td>Task management &amp; individual KPIs</td><td>CRM development</td><td class="num">S5</td><td><span class="pill p-uat">In progress</span></td><td>—</td><td class="num">—</td><td class="num">—</td><td><div class="ready"><span>SOP</span><span>Trained</span><span>Quiz</span></div></td></tr>
+          <tr><td class="id">F-07</td><td>Leadership dashboards</td><td>CRM development</td><td class="num">S6</td><td><span class="pill p-plan">Planned</span></td><td>—</td><td class="num">—</td><td class="num">—</td><td><div class="ready"><span>SOP</span><span>Trained</span><span>Quiz</span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sheet-foot"><span>Rollovers and defect counts fed the next sprint plan. Blocker age decided when to escalate.</span><span class="tag">Sample data</span></div>
+  </section>
+
+  <!-- 3. DEFINITION OF DONE -->
+  <section class="sheet" id="dod">
+    <div class="sheet-head">
+      <span class="eyebrow">Artifact 3 · Definition of Done</span>
+      <h2>A feature is done when people can use it</h2>
+      <p class="note">Development finishing was only half of "done". A feature counted as delivered once SOPs were published, staff were trained, and they had passed the certification quiz.</p>
+    </div>
+    <div class="dod">
+      <div class="dod-col">
+        <h3>Built<small>Owned with vendor teams</small></h3>
+        <ul>
+          <li><span class="box"></span><span>User stories and acceptance criteria agreed with business owners</span></li>
+          <li><span class="box"></span><span>Development complete and deployed to the test environment</span></li>
+          <li><span class="box"></span><span>UAT run with real store scenarios</span></li>
+          <li><span class="box"></span><span>No open critical defects; others logged with an owner</span></li>
+          <li><span class="box"></span><span>Dependencies on other vendors confirmed</span></li>
+        </ul>
+      </div>
+      <div class="dod-arrow" aria-hidden="true">
+        <svg viewBox="0 0 28 28" fill="none"><path d="M5 14h16M15 8l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        not done yet
+      </div>
+      <div class="dod-col ops">
+        <h3>Ready<small>Owned with store teams</small></h3>
+        <ul>
+          <li><span class="box"></span><span>SOP published and versioned: what, when, who, do's and don'ts</span></li>
+          <li><span class="box"></span><span>L&amp;D chapter ready: why each step matters, how to do it, and what good looks like</span></li>
+          <li><span class="box"></span><span>Both training batches completed, with role play</span></li>
+          <li><span class="box"></span><span>Staff passed the certification quiz</span></li>
+          <li><span class="box"></span><span>Office hours and shadow sessions scheduled for go-live</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="done-line"><span class="tag">Done =</span> Built + Ready, signed off in the tracker</div>
+    <div class="sheet-foot"><span>Used for every Phase 1 feature</span><span class="tag">Checklist template</span></div>
+  </section>
+
+  <!-- 4. STAKEHOLDER MAP -->
+  <section class="sheet" id="stakeholders">
+    <div class="sheet-head">
+      <span class="eyebrow">Artifact 4 · Stakeholder map</span>
+      <h2>The business on one side, six vendors on the other</h2>
+      <p class="note">As business-side owner, I translated what the stores needed into requirements the vendor teams could build, and kept leadership informed on progress, risks and trade-offs.</p>
+    </div>
+    <div class="smap">
+      <div class="lead"><div class="node"><b>Senior leadership</b><span>Priorities · trade-off decisions · sign-off</span></div></div>
+      <div class="group biz">
+        <span class="tag">Business teams</span>
+        <div class="node"><b>Sales teams</b><span>3 branches · 43 staff</span></div>
+        <div class="node"><b>Floor managers</b><span>Daily adoption and SOP adherence</span></div>
+        <div class="node"><b>Inventory &amp; Orders</b><span>Order tracking and fulfilment rules</span></div>
+        <div class="node"><b>HR</b><span>Hiring rounds and onboarding</span></div>
+      </div>
+      <div class="core">
+        <b>Program Manager</b>
+        <span>Business-side owner</span>
+        <ul>
+          <li>Requirements &amp; user stories</li>
+          <li>Prioritisation &amp; scope</li>
+          <li>Tracker, blockers, escalations</li>
+          <li>UAT, SOPs &amp; training</li>
+        </ul>
+      </div>
+      <div class="group ven">
+        <span class="tag">Vendor teams</span>
+        <div class="node"><b>CRM development</b><span>Core platform</span></div>
+        <div class="node"><b>Gift cards</b><span>Referral program</span></div>
+        <div class="node"><b>Digital gold</b><span>Customer retention</span></div>
+        <div class="node"><b>Android &amp; iOS app</b><span>Customer-facing app</span></div>
+        <div class="node"><b>Billing services</b><span>Billing integration</span></div>
+        <div class="node"><b>Campaigns</b><span>Customer outreach</span></div>
+      </div>
+    </div>
+    <div class="sheet-foot"><span>Business needs flow in from the left; build status and risks flow back from the right</span><span class="tag">Phase 1 scope</span></div>
+  </section>
+
+  <!-- 5. CADENCE + ESCALATION -->
+  <section class="sheet" id="cadence">
+    <div class="sheet-head">
+      <span class="eyebrow">Artifact 5 · Program cadence &amp; escalation</span>
+      <h2>A predictable rhythm, and a clear path when something gets stuck</h2>
+      <p class="note">Tracker updates were tied to the meeting rhythm, and decisions went out in writing, which kept status meetings to a minimum.</p>
+    </div>
+    <div class="split">
+      <div>
+        <span class="sub">Cadence</span>
+        <div class="cadence">
+          <div class="cad"><span class="tag">Delivery</span><b>Scrum calls</b><p>Vendor teams report progress and blockers; the tracker is updated in the call.</p></div>
+          <div class="cad"><span class="tag">Adoption</span><b>Daily office hours</b><p>Sales staff bring questions during the transition; recurring issues feed the SOPs.</p></div>
+          <div class="cad"><span class="tag">Quality</span><b>Weekly shadow sessions</b><p>Checks on how the new process is followed on the floor.</p></div>
+          <div class="cad"><span class="tag">Decisions</span><b>Minutes of meetings</b><p>Sent after every decision, so no one needs a meeting to catch up.</p></div>
+        </div>
+      </div>
+      <div>
+        <span class="sub">Vendor escalation path</span>
+        <div class="esc">
+          <div class="step"><div class="rail"><span class="dot">1</span><i></i></div><div class="txt"><b>Blocker raised</b><span>In a scrum call or office hours</span></div></div>
+          <div class="step"><div class="rail"><span class="dot">2</span><i></i></div><div class="txt"><b>Logged in the tracker</b><span>Owner, dependency and date opened; age counted daily</span></div></div>
+          <div class="step"><div class="rail"><span class="dot">3</span><i></i></div><div class="txt"><b>Owning team resolves</b><span>Followed up at each scrum call</span></div></div>
+          <div class="step hot"><div class="rail"><span class="dot">4</span><i></i></div><div class="txt"><b>Escalated to the vendor lead</b><span>When the blocker ages or threatens a milestone</span></div></div>
+          <div class="step hot"><div class="rail"><span class="dot">5</span><i></i></div><div class="txt"><b>Trade-off taken to leadership</b><span>If the critical path is at risk: re-plan, re-scope or move the date</span></div></div>
+          <div class="step end"><div class="rail"><span class="dot">✓</span><i></i></div><div class="txt"><b>Decision recorded</b><span>Shared in minutes; tracker and sprint plan updated</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-foot"><span>Same rhythm across all six vendor teams</span><span class="tag">Process flow</span></div>
+  </section>
+</div>
+</main>
+<script>
+(function(){var els=[].slice.call(document.querySelectorAll('.reveal'));if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
+els.forEach(function(e){if(e.getBoundingClientRect().top<innerHeight){e.classList.add('in')}else{io.observe(e)}});})();
+</script>
+<footer class="site-footer"><div class="container">
+<span>© 2026 Sneha Nandini Bolloju · Hyderabad, India</span>
+<span><a href="https://www.linkedin.com/in/sneha-nandini-bolloju" target="_blank" rel="noopener">LinkedIn</a> · snehanandini94@gmail.com</span>
+</div></footer>
+</body>
+</html>
