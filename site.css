@@ -411,3 +411,13 @@ h2 { font-size: clamp(30px, 4vw, 40px); font-weight: 600; line-height: 1.1; }
 .figure b, .result b, .adopt b, .kpi .v, .num, td.num { font-variant-numeric: lining-nums tabular-nums; }
 @media (max-width: 860px) { .portrait { width: min(250px, 66%); } }
 article.stack { grid-template-columns: minmax(0, 1fr); }
+
+/* ---------- mobile hero fixes ---------- */
+/* The width/height attributes on the photo were forcing a tall, cropped box; let the 4:5 ratio decide the height. */
+.arch { height: auto; }
+/* The late desktop .note rule was overriding the mobile one and pushing the note off-screen. */
+@media (max-width: 860px) {
+  .portrait { margin: 10px auto 72px; }
+  .note { left: auto; right: 0; bottom: -62px; font-size: 20px; transform: rotate(-4deg); }
+  .note .curly { display: none; }
+}
